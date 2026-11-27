@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-card: #1a1a1a;
+  --bg-header: #0d0d0dea;
+  --bg-input: #222222;
+
+  --text-primary: #e8e8e8;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+
+  --accent-primary: #e8e8e8;
+  --accent-primary-hover: #ffffff;
+  --accent-primary-glow: rgba(232, 232, 232, 0.2);
+
+  --accent-secondary: #b0b0b0;
+  --accent-secondary-hover: #cccccc;
+  --accent-secondary-glow: rgba(176, 176, 176, 0.15);
+
+  --border-color: #2a2a2a;
+  --border-hover: #444444;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+
+  --danger: #e74c3c;
+  --success: #2ecc71;
+
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f2f2f2;
+  --bg-secondary: #e8e8e8;
+  --bg-card: #fafafa;
+  --bg-header: #f5f5f5ea;
+  --bg-input: #ececec;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  --accent-primary: #1a1a1a;
+  --accent-primary-hover: #000000;
+  --accent-primary-glow: rgba(26, 26, 26, 0.15);
+
+  --accent-secondary: #444444;
+  --accent-secondary-hover: #333333;
+  --accent-secondary-glow: rgba(68, 68, 68, 0.1);
+
+  --border-color: #d5d5d5;
+  --border-hover: #aaaaaa;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+
+  --danger: #c0392b;
+  --success: #27ae60;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.65rem; }
+  h3 { font-size: 1.35rem; }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  a:hover {
+    color: var(--accent-primary-hover);
+  }
+
+  strong {
+    color: var(--text-primary);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+@keyframes btnGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--accent-primary-glow),
+                0 0 10px transparent;
+  }
+  50% {
+    box-shadow: 0 0 12px var(--accent-primary-glow),
+                0 0 25px var(--accent-primary-glow);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@layer utilities {
+  .bench-header {
+    background: var(--bg-header);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+  }
+
+  .bench-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    transition: opacity var(--transition-fast);
+  }
+  .bench-logo:hover {
+    opacity: 0.75;
+  }
+
+  .bench-badge {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    font-weight: 700;
+    font-size: 0.7rem;
+    animation: pulseBadge 2s ease-in-out infinite;
+  }
+
+  .bench-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bench-btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    animation: btnGlow 3s ease-in-out infinite;
+  }
+  .bench-btn-primary:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+  .bench-btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .bench-btn-secondary {
+    background: var(--accent-secondary);
+    color: var(--bg-primary);
+  }
+  .bench-btn-secondary:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+  }
+  .bench-btn-secondary:active {
+    transform: scale(0.98);
+  }
+
+  .bench-btn-icon {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    animation: btnGlow 3s ease-in-out infinite;
+  }
+  .bench-btn-icon:hover {
+    transform: scale(1.12);
+    filter: brightness(1.1);
+  }
+  .bench-btn-icon:active {
+    transform: scale(0.95);
+  }
+
+  .bench-btn-counter {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  .bench-btn-counter:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    transform: scale(1.08);
+  }
+
+  .bench-btn-link, a.bench-btn-link {
+    background: var(--text-primary);
+    color: var(--bg-primary) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--transition-fast);
+    animation: btnGlow 3s ease-in-out infinite;
+  }
+  .bench-btn-link:hover, a.bench-btn-link:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    color: var(--bg-primary) !important;
+  }
+
+  .bench-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem;
+    transition: all var(--transition-normal);
+    animation: fadeInUp 0.5s ease-out both;
+  }
+  .bench-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transform: translateY(-4px);
+  }
+
+  .bench-card-img {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+  }
+  .bench-card:hover .bench-card-img {
+    transform: scale(1.02);
+  }
+
+  .bench-card-title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .bench-card-price {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .bench-product-title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .bench-product-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .bench-product-price {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .bench-product-img {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-normal);
+  }
+  .bench-product-img:hover {
+    transform: scale(1.03);
+  }
+
+  .bench-cart-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    transition: all var(--transition-normal);
+  }
+  .bench-cart-item:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 16px var(--shadow-color);
+  }
+
+  .bench-cart-img {
+    border-radius: var(--radius-md);
+  }
+
+  .bench-cart-price {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .bench-cart-subtotal {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+
+  .bench-cart-total {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    padding: 1rem 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 1rem;
+  }
+
+  .bench-cart-amount {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    min-width: 2rem;
+    text-align: center;
+  }
+
+  .bench-section-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.02em;
+  }
+  .bench-section-title::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--text-primary), var(--text-muted));
+    border-radius: 100px;
+    margin: 0.5rem auto 0;
+  }
+
+  .bench-empty-state {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .bench-theme-toggle {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    border-radius: 100px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-input);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    padding: 0 3px;
+  }
+  .bench-theme-toggle:hover {
+    border-color: var(--text-muted);
+  }
+  .bench-theme-toggle-knob {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-primary);
+    transition: transform var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+  }
+  [data-theme="light"] .bench-theme-toggle-knob {
+    transform: translateX(20px);
+  }
+
+  .bench-icon-cart {
+    color: var(--text-primary);
+    transition: color var(--transition-fast);
+  }
+  .bench-icon-cart:hover {
+    color: var(--text-muted);
+  }
+
+  .bench-card:nth-child(1) { animation-delay: 0s; }
+  .bench-card:nth-child(2) { animation-delay: 0.06s; }
+  .bench-card:nth-child(3) { animation-delay: 0.12s; }
+  .bench-card:nth-child(4) { animation-delay: 0.18s; }
+  .bench-card:nth-child(5) { animation-delay: 0.24s; }
+  .bench-card:nth-child(6) { animation-delay: 0.30s; }
+  .bench-card:nth-child(7) { animation-delay: 0.36s; }
+  .bench-card:nth-child(8) { animation-delay: 0.42s; }
+  .bench-card:nth-child(9) { animation-delay: 0.48s; }
+  .bench-card:nth-child(10) { animation-delay: 0.54s; }
+}
